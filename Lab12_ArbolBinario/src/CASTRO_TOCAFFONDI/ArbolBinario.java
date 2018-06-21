@@ -5,11 +5,14 @@ import javax.swing.JOptionPane;
 
 public class ArbolBinario {
     private Nodo raiz;
+    private int cont,i;
     public ArbolBinario(){
         raiz=null;
     }
     
-    public void insetar(int dato){
+    public void insertar(){
+        int dato=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el elemento","Ingreso de datos",JOptionPane.INFORMATION_MESSAGE));
+        cont++;
         Nodo nuevo=new Nodo(dato);
         if(raiz==null){
             raiz=nuevo;
@@ -34,12 +37,13 @@ public class ArbolBinario {
     
     public void PreOrden(Nodo aux){
         if(aux!=null){
-            System.out.println(aux.getDato()+"--");
+            System.out.println(aux.getDato());
             PreOrden(aux.getIzquierdo());
             PreOrden(aux.getDerecho());
         }
     }
     public void PreOrden(){
+        System.out.println("PRE_ORDEN");
         PreOrden(raiz);
         System.out.println("");
     }
@@ -47,11 +51,12 @@ public class ArbolBinario {
     public void EntreOrden(Nodo aux){
         if(aux!=null){
             EntreOrden(aux.getIzquierdo());
-            System.out.println(aux.getDato()+"--");
+            System.out.println(aux.getDato());
             EntreOrden(aux.getDerecho());
         }
     }
     public void EntreOrden(){
+        System.out.println("ENTRE_ORDEN");
         EntreOrden(raiz);
         System.out.println("");
     }
@@ -60,10 +65,11 @@ public class ArbolBinario {
         if(aux!=null){
             PostOrden(aux.getIzquierdo());
             PostOrden(aux.getDerecho());
-            System.out.println(aux.getDato()+"--");
+            System.out.println(aux.getDato());
         }
     }
     public void PostOrden(){
+        System.out.println("POST_ORDEN");
         PostOrden(raiz);
         System.out.println("");
     }
@@ -93,19 +99,28 @@ public class ArbolBinario {
         return false;
     }
 
+    public void contarNodos(){
+        if(cont==0){
+            JOptionPane.showMessageDialog(null,"No hay nodos en el árbol","Árbol vacio",JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null,"Hay "+cont+" nodos en el árbol","Cantidad de nodos",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     public void EliminarNodo() {
         Nodo aux=raiz;
         int dato=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el elemento que desea eliminar","Eliminar",JOptionPane.INFORMATION_MESSAGE));
+        cont--;
         if(buscar(aux, dato)){
-            JOptionPane.showMessageDialog(null,"El elemento "+dato+" ha sido eliminado correctamente","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
             Nodo anterior=aux;
             if(dato<anterior.getDato()){
                 anterior.setIzquierdo(null);
             }else{
                 anterior.setDerecho(null);
             }
+            JOptionPane.showMessageDialog(null,"El elemento "+dato+" ha sido eliminado correctamente","Eliminación exitosa",JOptionPane.INFORMATION_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(null,"No se encontro el elemento "+dato,"Nodo no existe",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"No se encontró el elemento "+dato,"Nodo no existe",JOptionPane.ERROR_MESSAGE);
         }
     }
 }

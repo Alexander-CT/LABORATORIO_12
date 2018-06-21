@@ -4,22 +4,21 @@ import javax.swing.JOptionPane;
 public class Menu {
     public Menu(){
         ArbolBinario arb=new ArbolBinario();
-        int element = 0;
         String mensaje="1. Agregar nodo\n";
         mensaje+="2. PreOrden\n";
         mensaje+="3. EntreOrden\n";
         mensaje+="4. PostOrden\n";
         mensaje+="5. Buscar Nodo\n";
         mensaje+="6. Eliminar Nodo\n";
-        mensaje+="7. Salir";
+        mensaje+="7. Contar nodos\n";
+        mensaje+="8. Salir";
         int opcion;
         do{
             opcion=Integer.parseInt(JOptionPane.showInputDialog(null,mensaje,"MENÚ",JOptionPane.INFORMATION_MESSAGE));
             switch(opcion){
 
                 case 1: //AGREGAR NODO
-                    element=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingresa el elemento"));
-                    arb.insetar(element);
+                    arb.insertar();
                     break;
                 case 2: //PREORDEN
                     arb.PreOrden();
@@ -36,7 +35,10 @@ public class Menu {
                 case 6: //ELIMINAR NODO
                     arb.EliminarNodo();
                     break;
+                case 7: //CANTIDAD DE NODOS
+                    arb.contarNodos();
+                    break;
             }
-        }while(opcion!=7);
+        }while(opcion!=8);
     }
 }
